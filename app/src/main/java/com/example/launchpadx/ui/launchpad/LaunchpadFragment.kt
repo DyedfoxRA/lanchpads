@@ -1,22 +1,21 @@
 package com.example.launchpadx.ui.launchpad
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.launchpadx.R
+import com.example.launchpadx.databinding.LaunchpadFragmentBinding
+import com.example.launchpadx.ui.base.BaseBindingFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LaunchpadFragment : Fragment() {
+class LaunchpadFragment : BaseBindingFragment<LaunchpadFragmentBinding>(R.layout.launchpad_fragment) {
 
     companion object {
         fun newInstance() = LaunchpadFragment()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.launchpad_fragment, container, false)
+    private val viewModel: LaunchpadViewModel by viewModel()
+
+
+    override fun bind(binding: LaunchpadFragmentBinding) {
+        binding.vm = viewModel
     }
+
 }

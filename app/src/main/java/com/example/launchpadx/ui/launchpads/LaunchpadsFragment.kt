@@ -1,22 +1,20 @@
 package com.example.launchpadx.ui.launchpads
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.launchpadx.R
+import com.example.launchpadx.databinding.LaunchpadsFragmentBinding
+import com.example.launchpadx.ui.base.BaseBindingFragment
+import org.koin.android.ext.android.inject
 
 
-class LaunchpadsFragment : Fragment(R.layout.launchpads_fragment) {
+class LaunchpadsFragment : BaseBindingFragment<LaunchpadsFragmentBinding>(R.layout.launchpads_fragment) {
 
     companion object {
         fun newInstance() = LaunchpadsFragment()
     }
 
-    private lateinit var viewModel: LaunchpadsViewModel
+    private val viewModel: LaunchpadsViewModel by inject()
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LaunchpadsViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun bind(binding: LaunchpadsFragmentBinding) {
+        binding.vm = viewModel
     }
 }
