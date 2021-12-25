@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mob_navigation"
+    app:startDestination="@id/launchpadsFragment">
+
+    <fragment
+        android:id="@+id/launchpadsFragment"
+        android:name="com.example.launchpadx.ui.launchpads.LaunchpadsFragment"
+        android:label="launchpads_fragment"
+        tools:layout="@layout/launchpads_fragment" >
+        <action
+            android:id="@+id/action_launchpadsFragment_to_launchpadFragment"
+            app:destination="@id/launchpadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/launchpadFragment"
+        android:name="com.example.launchpadx.ui.launchpad.LaunchpadFragment"
+        android:label="LaunchpadFragment" />
+</navigation>
