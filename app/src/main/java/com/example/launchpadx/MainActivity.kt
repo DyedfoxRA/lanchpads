@@ -1,8 +1,9 @@
-package com.example.lanchpadx
+package com.example.launchpadx
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.lanchpadx.ui.main.MainFragment
+import com.example.lanchpadx.R
+import com.example.launchpadx.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

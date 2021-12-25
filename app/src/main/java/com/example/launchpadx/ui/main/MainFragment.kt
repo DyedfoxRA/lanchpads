@@ -1,4 +1,4 @@
-package com.example.lanchpadx.ui.main
+package com.example.launchpadx.ui.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
