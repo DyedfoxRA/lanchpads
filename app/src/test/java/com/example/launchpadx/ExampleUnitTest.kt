@@ -1,4 +1,4 @@
-package com.example.lanchpadx
+package com.example.launchpadx
 
 import org.junit.Test
 
