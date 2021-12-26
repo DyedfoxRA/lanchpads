@@ -13,7 +13,6 @@ class LaunchpadFragment : BaseBindingFragment<LaunchpadFragmentBinding>(R.layout
 
     private val viewModel: LaunchpadViewModel by viewModel()
 
-
     override fun bind(binding: LaunchpadFragmentBinding) {
         binding.vm = viewModel
     }

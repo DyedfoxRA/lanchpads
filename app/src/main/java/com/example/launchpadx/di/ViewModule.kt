@@ -7,6 +7,6 @@ import org.koin.dsl.module
 
 val viewModule = module {
 
-    viewModel { LaunchpadViewModel() }
-    viewModel { LaunchpadsViewModel() }
+    viewModel { LaunchpadViewModel(navigator = get()) }
+    viewModel { LaunchpadsViewModel(navigator = get()) }
 }
