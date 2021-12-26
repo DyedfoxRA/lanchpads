@@ -1,6 +1,7 @@
 package com.example.launchpadx
 
 import android.app.Application
+import com.example.launchpadx.di.network.apiLaunchpadsServiceModule
 import com.example.launchpadx.di.networkModule
 import com.example.launchpadx.di.systemModule
 import com.example.launchpadx.di.viewModule
@@ -22,7 +23,8 @@ class App : Application() {
                 listOf(
                     networkModule,
                     systemModule,
-                    viewModule
+                    viewModule,
+                    apiLaunchpadsServiceModule
                 )
             )
         }
