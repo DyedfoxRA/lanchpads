@@ -1,7 +1,7 @@
 package com.example.launchpadx.data.api.service.launchpads
 
 import com.example.launchpadx.data.entity.Launchpad
-import com.example.launchpadx.data.entity.LaunchpadsResponse
+import com.example.launchpadx.data.response.LaunchpadsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
