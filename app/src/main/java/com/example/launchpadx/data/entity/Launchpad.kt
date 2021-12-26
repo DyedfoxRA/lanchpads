@@ -1,6 +1,7 @@
 package com.example.launchpadx.data.entity
 
 
+import com.example.launchpadx.ui.base.adapter.ListAdapterItem
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -11,7 +12,7 @@ data class Launchpad(
     @Json(name = "details")
     val details: String,
     @Json(name = "id")
-    val id: Int,
+    val idLaunchpad: Int,
     @Json(name = "location")
     val location: Location,
     @Json(name = "site_id")
@@ -25,5 +26,6 @@ data class Launchpad(
     @Json(name = "vehicles_launched")
     val vehiclesLaunched: List<String>,
     @Json(name = "wikipedia")
-    val wikipedia: String
-)
+    val wikipedia: String,
+    override val id: Long = 0
+): ListAdapterItem

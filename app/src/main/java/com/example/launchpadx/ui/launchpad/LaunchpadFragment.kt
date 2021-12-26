@@ -2,7 +2,7 @@ package com.example.launchpadx.ui.launchpad
 
 import com.example.launchpadx.R
 import com.example.launchpadx.databinding.LaunchpadFragmentBinding
-import com.example.launchpadx.ui.base.BaseBindingFragment
+import com.example.launchpadx.ui.base.fragment.BaseBindingFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LaunchpadFragment : BaseBindingFragment<LaunchpadFragmentBinding>(R.layout.launchpad_fragment) {

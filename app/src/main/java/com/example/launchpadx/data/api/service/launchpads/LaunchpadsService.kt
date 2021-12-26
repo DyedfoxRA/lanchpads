@@ -9,7 +9,7 @@ import retrofit2.http.Path
 interface LaunchpadsService {
 
     @GET("launchpads")
-    suspend fun getAllLaunchpads(): Response<LaunchpadsResponse>
+    suspend fun getAllLaunchpads(): Response<List<Launchpad>>
 
     @GET("launchpads/{site_id}")
     suspend fun getOneLaunchpad(@Path("site_id") siteId: String): Response<Launchpad>

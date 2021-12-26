@@ -1,4 +1,4 @@
-package com.example.launchpadx.ui.base
+package com.example.launchpadx.ui.base.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
