@@ -1,4 +1,4 @@
-package com.example.launchpadx.domain.interaction.launchpads
+package com.example.launchpadx.domain.interaction.launchpads.api
 
 import com.example.launchpadx.data.entity.Launchpad
 import retrofit2.Response

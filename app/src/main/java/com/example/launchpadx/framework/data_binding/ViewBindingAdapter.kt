@@ -29,18 +29,3 @@ fun submitList(recyclerView: RecyclerView, list: List<ListAdapterItem>?) {
 fun manageState(progressBar: ProgressBar, state: Boolean) {
     progressBar.visibility = if (state) View.VISIBLE else View.GONE
 }
-
-//@BindingAdapter("setImage")
-//fun setImage(imageView: ShapeableImageView, image: Int) {
-//    Glide.with(imageView.context)
-//        .load(image)
-//        .into(imageView)
-//}
-
-//@BindingAdapter("setFavouriteCondition")
-//fun setFavouriteCondition(imageView: ShapeableImageView, isFavourite: Boolean) {
-//    if (isFavourite) {
-//        imageView.setImageResource(R.drawable.ic_favorite)
-//    } else {
-//        imageView.setImageResource(R.drawable.ic_favorite_border)
-//    }
