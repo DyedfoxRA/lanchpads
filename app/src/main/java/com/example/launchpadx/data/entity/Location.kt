@@ -1,17 +1,15 @@
 package com.example.launchpadx.data.entity
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.SerializedName
 
-@JsonClass(generateAdapter = true)
 data class Location(
-    @Json(name = "latitude")
+    @SerializedName("latitude")
     val latitude: Double,
-    @Json(name = "longitude")
+    @SerializedName("longitude")
     val longitude: Double,
-    @Json(name = "name")
+    @SerializedName("name")
     val name: String,
-    @Json(name = "region")
+    @SerializedName("region")
     val region: String
 )

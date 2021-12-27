@@ -1,12 +1,15 @@
-package com.example.launchpadx.di
+package com.example.launchpadx.di.network
 
 import com.example.launchpadx.BuildConfig
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.squareup.moshi.Moshi
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
@@ -17,6 +20,9 @@ const val CONNECTION_READ_TIMEOUT_SECONDS = 30L
 val networkModule = module {
 
     single<Moshi> { Moshi.Builder().build() }
+    single<Gson> {
+        GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
+    }
 
     single<OkHttpClient> {
         OkHttpClient.Builder()
@@ -29,9 +35,9 @@ val networkModule = module {
     single<Retrofit> {
         Retrofit.Builder()
             .client(get())
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .addConverterFactory(MoshiConverterFactory.create(get()))
             .baseUrl(BuildConfig.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+//            .addConverterFactory(MoshiConverterFactory.create(get()))
             .build()
     }
 }

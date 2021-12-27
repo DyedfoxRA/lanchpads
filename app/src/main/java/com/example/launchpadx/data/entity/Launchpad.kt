@@ -2,30 +2,29 @@ package com.example.launchpadx.data.entity
 
 
 import com.example.launchpadx.ui.base.adapter.ListAdapterItem
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.SerializedName
 
-@JsonClass(generateAdapter = true)
 data class Launchpad(
-    @Json(name = "attempted_launches")
+    @SerializedName("attempted_launches")
     val attemptedLaunches: Int,
-    @Json(name = "details")
+    @SerializedName("details")
     val details: String,
-    @Json(name = "id")
-    val idLaunchpad: Int,
-    @Json(name = "location")
+    @SerializedName("id")
+    override val id: Long,
+    @SerializedName("location")
     val location: Location,
-    @Json(name = "site_id")
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("site_id")
     val siteId: String,
-    @Json(name = "site_name_long")
+    @SerializedName("site_name_long")
     val siteNameLong: String,
-    @Json(name = "status")
+    @SerializedName("status")
     val status: String,
-    @Json(name = "successful_launches")
+    @SerializedName("successful_launches")
     val successfulLaunches: Int,
-    @Json(name = "vehicles_launched")
+    @SerializedName("vehicles_launched")
     val vehiclesLaunched: List<String>,
-    @Json(name = "wikipedia")
-    val wikipedia: String,
-    override val id: Long = 0
+    @SerializedName("wikipedia")
+    val wikipedia: String
 ): ListAdapterItem
