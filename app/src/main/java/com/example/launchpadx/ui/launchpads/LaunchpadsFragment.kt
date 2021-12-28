@@ -1,5 +1,7 @@
 package com.example.launchpadx.ui.launchpads
 
+import android.os.Bundle
+import android.widget.Toast
 import com.example.launchpadx.R
 import com.example.launchpadx.data.entity.LaunchpadsList
 import com.example.launchpadx.databinding.LaunchpadsFragmentBinding
@@ -18,5 +20,16 @@ class LaunchpadsFragment : BaseBindingFragment<LaunchpadsFragmentBinding>(R.layo
     override fun bind(binding: LaunchpadsFragmentBinding) {
         binding.vm = viewModel
         binding.adapter = LaunchpadAdapter(LaunchpadsList(), viewModel)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initListeners()
+    }
+
+    private fun initListeners(){
+        viewModel.errorMessage.observe(this, {
+            Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+        })
     }
 }

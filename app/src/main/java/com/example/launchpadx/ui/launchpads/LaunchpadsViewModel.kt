@@ -16,11 +16,12 @@ import kotlinx.coroutines.launch
 class LaunchpadsViewModel(
     private val navigator: Navigator,
     private val allLaunchpadsProvider: AllLaunchpadsProvider,
-    private val saveLaunchpadProvider: SaveLaunchpadProvider
+    private val saveLaunchpadProvider: SaveLaunchpadProvider,
 ) : ViewModel(), LaunchpadListener {
 
     val launchpads = MutableLiveData<LaunchpadsList>()
     val showProgress = MutableLiveData<Boolean>()
+    val errorMessage = MutableLiveData<String>()
 
     init {
         loadLaunchpads()
@@ -46,6 +47,7 @@ class LaunchpadsViewModel(
                 }
                 error = {
                     showProgress.postValue(false)
+                    errorMessage.value = it.message
                 }
                 success = {
                     showProgress.postValue(true)

@@ -18,6 +18,7 @@ class LaunchpadViewModel(
 
     val launchpad = MutableLiveData<Launchpad>()
     val showProgress = MutableLiveData<Boolean>()
+    val errorMessage = MutableLiveData<String>()
 
     init {
         getLaunchpad()
@@ -38,6 +39,7 @@ class LaunchpadViewModel(
                 }
                 error = {
                     showProgress.postValue(false)
+                    errorMessage.value = it.message
                 }
                 success = {
                     showProgress.postValue(false)
