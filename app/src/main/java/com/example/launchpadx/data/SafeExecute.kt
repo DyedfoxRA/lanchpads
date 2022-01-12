@@ -1,12 +1,11 @@
 package com.example.launchpadx.data
 
-import com.example.launchpadx.data.response.ValidationErrorResponse
-import com.squareup.moshi.Moshi
 import com.example.launchpadx.data.exception.ApiException
 import com.example.launchpadx.data.exception.ErrorMessageException
 import com.example.launchpadx.data.exception.ValidationException
+import com.example.launchpadx.data.response.ValidationErrorResponse
+import com.squareup.moshi.Moshi
 import retrofit2.Response
-import java.util.concurrent.CancellationException
 
 suspend fun <T> safeExecute(block: SafeExecute<T>.() -> Unit): Unit = SafeExecute<T>().apply(block).execute()
 
@@ -24,15 +23,19 @@ class SafeExecute<T> {
                 success(data)
             } else {
                 val validationAdapter = Moshi.Builder().build().adapter(ValidationErrorResponse::class.java)
-                error(response.errorBody()?.let { errorBody ->
-                    val error = errorBody.string()
-                    val validation = validationAdapter.fromJson(error)
-                    validation?.validation?.let {
-                        ValidationException(it)
-                    } ?: validation?.error?.let {
-                        ErrorMessageException(it)
-                    } ?: ApiException("Unknown error: $error")
-                } ?: Exception(("Unknown error")))
+                error(
+                    response.errorBody()?.let { errorBody ->
+                        val error = errorBody.string()
+                        val validation = validationAdapter.fromJson(error)
+                        validation?.validation?.let {
+                            ValidationException(it)
+                        } ?: validation?.error?.let {
+                            ErrorMessageException(it)
+                        } ?: ApiException("Unknown error: $error")
+                    } ?: Exception(
+                        ("Unknown error")
+                    )
+                )
             }
         } catch (e: Exception) {
             error(e)

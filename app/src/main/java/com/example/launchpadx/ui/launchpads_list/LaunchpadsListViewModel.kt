@@ -28,10 +28,10 @@ class LaunchpadsListViewModel(
     }
 
     override fun onLaunchpadClick(launchpad: Launchpad) {
-       viewModelScope.launch {
-           saveLaunchpadProvider.execute(launchpad.siteId)
-           navigate()
-       }
+        viewModelScope.launch {
+            saveLaunchpadProvider.execute(launchpad.siteId)
+            navigate()
+        }
     }
 
     fun navigate(destinationId: Int = R.id.action_launchpadsFragment_to_launchpadFragment) {

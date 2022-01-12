@@ -39,4 +39,3 @@ class LaunchpadProviderImplTest : TestCase() {
         coVerify(exactly = 1) { launchpadProviderImpl.execute(any()) }
     }
 }
-

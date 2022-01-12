@@ -25,5 +25,4 @@ class LaunchpadItemFragment : BaseBindingFragment<LaunchpadItemFragmentBinding>(
             Toast.makeText(context, it, Toast.LENGTH_LONG).show()
         })
     }
-
 }

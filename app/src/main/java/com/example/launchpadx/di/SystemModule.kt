@@ -22,5 +22,4 @@ val systemModule = module {
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
     }
-
 }

@@ -8,7 +8,6 @@ import com.example.launchpadx.databinding.LaunchpadsListFragmentBinding
 import com.example.launchpadx.ui.base.fragment.BaseBindingFragment
 import org.koin.android.ext.android.inject
 
-
 class LaunchpadsListFragment : BaseBindingFragment<LaunchpadsListFragmentBinding>(R.layout.launchpads_list_fragment) {
 
     private val listViewModel: LaunchpadsListViewModel by inject()
