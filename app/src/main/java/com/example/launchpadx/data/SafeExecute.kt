@@ -34,8 +34,6 @@ class SafeExecute<T> {
                     } ?: ApiException("Unknown error: $error")
                 } ?: Exception(("Unknown error")))
             }
-        } catch (cancel: CancellationException) {
-            throw cancel
         } catch (e: Exception) {
             error(e)
         }

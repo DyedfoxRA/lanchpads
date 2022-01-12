@@ -1,21 +1,21 @@
 package com.example.launchpadx.di
 
-import com.example.launchpadx.ui.launchpad.LaunchpadViewModel
-import com.example.launchpadx.ui.launchpads.LaunchpadsViewModel
+import com.example.launchpadx.ui.launchpad_item.LaunchpadItemViewModel
+import com.example.launchpadx.ui.launchpads_list.LaunchpadsListViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModule = module {
 
     viewModel {
-        LaunchpadViewModel(
+        LaunchpadItemViewModel(
             navigator = get(),
             launchpadProvider = get(),
             getLaunchpadProvider = get()
         )
     }
     viewModel {
-        LaunchpadsViewModel(
+        LaunchpadsListViewModel(
             navigator = get(),
             allLaunchpadsProvider = get(),
             saveLaunchpadProvider = get()

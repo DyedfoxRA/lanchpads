@@ -1,4 +1,4 @@
-package com.example.launchpadx.ui.launchpads
+package com.example.launchpadx.ui.launchpads_list
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,7 +13,7 @@ import com.example.launchpadx.navigation.Navigator
 import com.example.launchpadx.navigation.fragment.GenericFragmentAction
 import kotlinx.coroutines.launch
 
-class LaunchpadsViewModel(
+class LaunchpadsListViewModel(
     private val navigator: Navigator,
     private val allLaunchpadsProvider: AllLaunchpadsProvider,
     private val saveLaunchpadProvider: SaveLaunchpadProvider,

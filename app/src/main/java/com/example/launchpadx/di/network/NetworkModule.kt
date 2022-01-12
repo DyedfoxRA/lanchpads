@@ -37,7 +37,6 @@ val networkModule = module {
             .client(get())
             .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-//            .addConverterFactory(MoshiConverterFactory.create(get()))
             .build()
     }
 }

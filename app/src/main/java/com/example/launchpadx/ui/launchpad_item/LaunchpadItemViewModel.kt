@@ -1,4 +1,4 @@
-package com.example.launchpadx.ui.launchpad
+package com.example.launchpadx.ui.launchpad_item
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +10,7 @@ import com.example.launchpadx.domain.interaction.launchpads.local.GetLaunchpadPr
 import com.example.launchpadx.navigation.Navigator
 import kotlinx.coroutines.launch
 
-class LaunchpadViewModel(
+class LaunchpadItemViewModel(
     private val navigator: Navigator,
     private val launchpadProvider: LaunchpadProvider,
     private val getLaunchpadProvider: GetLaunchpadProvider

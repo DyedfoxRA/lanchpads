@@ -6,21 +6,21 @@
     <data>
         <variable
             name="vm"
-            type="com.example.launchpadx.ui.launchpads.LaunchpadsViewModel" />
+            type="com.example.launchpadx.ui.launchpads_list.LaunchpadsListViewModel" />
 
         <variable
             name="adapter"
-            type="com.example.launchpadx.ui.launchpads.LaunchpadAdapter" />
+            type="com.example.launchpadx.ui.launchpads_list.LaunchpadAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.launchpadx.ui.launchpads.LaunchpadsFragment">
+        tools:context="com.example.launchpadx.ui.launchpads.LaunchpadsListFragment">
 
         <ProgressBar
-            android:id="@+id/progress_bar_movies"
+            android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
@@ -31,7 +31,7 @@
             app:manageState="@{vm.showProgress}" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_movie"
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"

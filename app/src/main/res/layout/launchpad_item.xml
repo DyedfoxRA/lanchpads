@@ -10,7 +10,7 @@
 
         <variable
             name="listener"
-            type="com.example.launchpadx.ui.launchpads.LaunchpadListener" />
+            type="com.example.launchpadx.ui.launchpads_list.LaunchpadListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
