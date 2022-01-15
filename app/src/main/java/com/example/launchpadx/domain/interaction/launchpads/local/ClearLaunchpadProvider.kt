@@ -1,5 +1,5 @@
 package com.example.launchpadx.domain.interaction.launchpads.local
 
 interface ClearLaunchpadProvider {
-    suspend fun execute()
+    suspend fun execute(): Boolean
 }

@@ -6,7 +6,7 @@ class ClearLaunchpadProviderImpl(
     private val launchpadRepository: LaunchpadRepository
 ) : ClearLaunchpadProvider {
 
-    override suspend fun execute() {
-        launchpadRepository.clearLaunchpadId()
+    override suspend fun execute(): Boolean {
+        return launchpadRepository.clearLaunchpadId()
     }
 }
