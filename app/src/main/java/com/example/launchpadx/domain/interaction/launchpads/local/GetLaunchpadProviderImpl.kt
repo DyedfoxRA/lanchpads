@@ -1,12 +1,12 @@
 package com.example.launchpadx.domain.interaction.launchpads.local
 
-import com.example.launchpadx.domain.interaction.launchpads.LaunchpadRepository
+import com.example.launchpadx.domain.interaction.launchpads.LaunchpadLocalRepository
 
 class GetLaunchpadProviderImpl(
-    private val launchpadRepository: LaunchpadRepository
+    private val launchpadLocalRepository: LaunchpadLocalRepository
 ) : GetLaunchpadProvider {
 
     override suspend fun execute(): String {
-        return launchpadRepository.getLaunchpadId()
+        return launchpadLocalRepository.getLaunchpadId()
     }
 }

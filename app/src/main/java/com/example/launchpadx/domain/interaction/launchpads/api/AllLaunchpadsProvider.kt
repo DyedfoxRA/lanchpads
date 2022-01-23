@@ -1,8 +1,7 @@
 package com.example.launchpadx.domain.interaction.launchpads.api
 
-import com.example.launchpadx.data.entity.LaunchpadsList
-import retrofit2.Response
+import com.example.launchpadx.domain.model.Launchpad
 
 interface AllLaunchpadsProvider {
-    suspend fun execute(): Response<LaunchpadsList>
+    suspend fun execute(): List<Launchpad>
 }

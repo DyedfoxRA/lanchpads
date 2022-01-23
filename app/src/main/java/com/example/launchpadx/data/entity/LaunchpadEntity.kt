@@ -1,17 +1,16 @@
 package com.example.launchpadx.data.entity
 
-import com.example.launchpadx.ui.base.adapter.ListAdapterItem
 import com.google.gson.annotations.SerializedName
 
-data class Launchpad(
+data class LaunchpadEntity(
     @SerializedName("attempted_launches")
     val attemptedLaunches: Int,
     @SerializedName("details")
     val details: String,
     @SerializedName("id")
-    override val id: Long,
+    val id: Long,
     @SerializedName("location")
-    val location: Location,
+    val locationEntity: LocationEntity,
     @SerializedName("name")
     val name: String,
     @SerializedName("site_id")
@@ -26,4 +25,4 @@ data class Launchpad(
     val vehiclesLaunched: List<String>,
     @SerializedName("wikipedia")
     val wikipedia: String
-) : ListAdapterItem
+)

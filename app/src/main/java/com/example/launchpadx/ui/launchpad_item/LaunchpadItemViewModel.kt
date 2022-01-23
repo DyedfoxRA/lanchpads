@@ -3,10 +3,9 @@ package com.example.launchpadx.ui.launchpad_item
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.launchpadx.data.entity.Launchpad
-import com.example.launchpadx.data.safeExecute
 import com.example.launchpadx.domain.interaction.launchpads.api.LaunchpadProvider
 import com.example.launchpadx.domain.interaction.launchpads.local.GetLaunchpadProvider
+import com.example.launchpadx.domain.model.Launchpad
 import com.example.launchpadx.navigation.Navigator
 import kotlinx.coroutines.launch
 
@@ -32,20 +31,6 @@ class LaunchpadItemViewModel(
     }
 
     private fun loadLaunchpad(siteId: String) {
-        viewModelScope.launch {
-            safeExecute<Launchpad> {
-                request = {
-                    launchpadProvider.execute(siteId)
-                }
-                error = {
-                    showProgress.postValue(false)
-                    errorMessage.value = it.message
-                }
-                success = {
-                    showProgress.postValue(false)
-                    launchpad.value = it
-                }
-            }
-        }
+        viewModelScope.launch {}
     }
 }

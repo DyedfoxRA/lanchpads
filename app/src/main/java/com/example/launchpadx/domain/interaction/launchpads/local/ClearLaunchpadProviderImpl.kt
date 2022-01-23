@@ -1,12 +1,12 @@
 package com.example.launchpadx.domain.interaction.launchpads.local
 
-import com.example.launchpadx.domain.interaction.launchpads.LaunchpadRepository
+import com.example.launchpadx.domain.interaction.launchpads.LaunchpadLocalRepository
 
 class ClearLaunchpadProviderImpl(
-    private val launchpadRepository: LaunchpadRepository
+    private val launchpadLocalRepository: LaunchpadLocalRepository
 ) : ClearLaunchpadProvider {
 
     override suspend fun execute(): Boolean {
-        return launchpadRepository.clearLaunchpadId()
+        return launchpadLocalRepository.clearLaunchpadId()
     }
 }

@@ -1,28 +1,29 @@
 package com.example.launchpadx.domain.interaction.launchpads.api
 
 import com.example.launchpadx.data.api.service.launchpads.LaunchpadsService
-import com.example.launchpadx.data.entity.Launchpad
-import com.example.launchpadx.data.entity.Location
+import com.example.launchpadx.data.entity.LaunchpadEntity
+import com.example.launchpadx.data.entity.LocationEntity
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import junit.framework.TestCase
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import retrofit2.Response
 
-class LaunchpadProviderImplTest : TestCase() {
+class LaunchpadEntityProviderImplTest : TestCase() {
 
     private val launchpadsService: LaunchpadsService = mockk(relaxed = true)
     val launchpadProviderImpl = LaunchpadProviderImpl(launchpadsService)
 
     // todo check test naming (some problem with adding custom name for test)
     @Test
-    fun test() {
-        val launchpad = Launchpad(
+    fun test() = runBlocking {
+        val launchpad = LaunchpadEntity(
             1,
             "",
             1,
-            Location(1.0, 1.0, "", ""),
+            LocationEntity(1.0, 1.0, "", ""),
             "",
             "",
             "",
@@ -32,10 +33,11 @@ class LaunchpadProviderImplTest : TestCase() {
             ""
         )
         val response = Response.success(launchpad)
-        coEvery {
-            launchpadsService.getOneLaunchpad(any())
-        } returns response
+        coEvery { launchpadsService.getOneLaunchpad(any()) } returns response
+        val realResult = launchpadProviderImpl.execute("")
+        coVerify { launchpadProviderImpl.execute(any()) }
+        coVerify { launchpadProviderImpl.execute("") }
 
-        coVerify(exactly = 1) { launchpadProviderImpl.execute(any()) }
+        assertTrue(realResult == response)
     }
 }

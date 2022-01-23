@@ -1,12 +1,12 @@
 package com.example.launchpadx.domain.interaction.launchpads.local
 
-import com.example.launchpadx.domain.interaction.launchpads.LaunchpadRepository
+import com.example.launchpadx.domain.interaction.launchpads.LaunchpadLocalRepository
 
 class SaveLaunchpadProviderImpl(
-    private val launchpadRepository: LaunchpadRepository
+    private val launchpadLocalRepository: LaunchpadLocalRepository
 ) : SaveLaunchpadProvider {
 
     override suspend fun execute(siteId: String): Boolean {
-        return launchpadRepository.saveLaunchpadId(siteId)
+        return launchpadLocalRepository.saveLaunchpadId(siteId)
     }
 }

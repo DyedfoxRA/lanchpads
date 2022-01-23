@@ -1,13 +1,12 @@
 package com.example.launchpadx.ui.launchpads_list
 
 import com.example.launchpadx.R
-import com.example.launchpadx.data.entity.Launchpad
-import com.example.launchpadx.data.entity.LaunchpadsList
 import com.example.launchpadx.databinding.LaunchpadItemBinding
+import com.example.launchpadx.domain.model.Launchpad
 import com.example.launchpadx.ui.base.adapter.BaseAdapter
 
 class LaunchpadAdapter(
-    list: LaunchpadsList,
+    list: List<Launchpad>,
     private val launchpadListener: LaunchpadListener
 ) : BaseAdapter<LaunchpadItemBinding, Launchpad>(list) {
 

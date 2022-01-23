@@ -1,7 +1,5 @@
 package com.example.launchpadx.di
 
-import com.example.launchpadx.domain.interaction.launchpads.api.AllLaunchpadsProvider
-import com.example.launchpadx.domain.interaction.launchpads.api.AllLaunchpadsProviderImpl
 import com.example.launchpadx.domain.interaction.launchpads.api.LaunchpadProvider
 import com.example.launchpadx.domain.interaction.launchpads.api.LaunchpadProviderImpl
 import com.example.launchpadx.domain.interaction.launchpads.local.ClearLaunchpadProvider
@@ -13,9 +11,9 @@ import com.example.launchpadx.domain.interaction.launchpads.local.SaveLaunchpadP
 import org.koin.dsl.module
 
 val launchpadModule = module {
-    single<AllLaunchpadsProvider> { AllLaunchpadsProviderImpl(launchpadsService = get()) }
-    single<LaunchpadProvider> { LaunchpadProviderImpl(launchpadsService = get()) }
-    single<GetLaunchpadProvider> { GetLaunchpadProviderImpl(launchpadRepository = get()) }
-    single<SaveLaunchpadProvider> { SaveLaunchpadProviderImpl(launchpadRepository = get()) }
-    single<ClearLaunchpadProvider> { ClearLaunchpadProviderImpl(launchpadRepository = get()) }
+//    single<AllLaunchpadsProvider> { AllLaunchpadsProviderImpl(launchpadRepository = get()) }
+    single<LaunchpadProvider> { LaunchpadProviderImpl(launchpadRepository = get()) }
+    single<GetLaunchpadProvider> { GetLaunchpadProviderImpl(launchpadLocalRepository = get()) }
+    single<SaveLaunchpadProvider> { SaveLaunchpadProviderImpl(launchpadLocalRepository = get()) }
+    single<ClearLaunchpadProvider> { ClearLaunchpadProviderImpl(launchpadLocalRepository = get()) }
 }

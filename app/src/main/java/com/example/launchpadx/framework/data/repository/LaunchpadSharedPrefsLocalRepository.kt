@@ -1,11 +1,11 @@
 package com.example.launchpadx.framework.data.repository
 
 import android.content.SharedPreferences
-import com.example.launchpadx.domain.interaction.launchpads.LaunchpadRepository
+import com.example.launchpadx.domain.interaction.launchpads.LaunchpadLocalRepository
 
-class LaunchpadSharedPrefsRepository(
+class LaunchpadSharedPrefsLocalRepository(
     private val sharedPrefs: SharedPreferences
-) : LaunchpadRepository {
+) : LaunchpadLocalRepository {
 
     companion object {
         private const val KEY_LAUNCHPAD_ID = "KEY_LAUNCHPAD_ID"

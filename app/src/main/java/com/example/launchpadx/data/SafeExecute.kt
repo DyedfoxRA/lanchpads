@@ -12,8 +12,8 @@ suspend fun <T> safeExecute(block: SafeExecute<T>.() -> Unit): Unit = SafeExecut
 class SafeExecute<T> {
 
     var request: suspend () -> Response<T> = { throw IllegalArgumentException("request argument missing") }
-    var success: (T) -> Unit = {}
-    var error: (Exception) -> Unit = {}
+    var success: suspend (T) -> Unit = {}
+    var error: suspend (Exception) -> Unit = {}
 
     suspend fun execute() {
         try {
@@ -25,7 +25,7 @@ class SafeExecute<T> {
                 val validationAdapter = Moshi.Builder().build().adapter(ValidationErrorResponse::class.java)
                 error(
                     response.errorBody()?.let { errorBody ->
-                        val error = errorBody.string()
+                        val error = errorBody.toString()
                         val validation = validationAdapter.fromJson(error)
                         validation?.validation?.let {
                             ValidationException(it)

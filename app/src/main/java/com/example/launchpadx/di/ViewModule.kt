@@ -17,8 +17,8 @@ val viewModule = module {
     viewModel {
         LaunchpadsListViewModel(
             navigator = get(),
-            allLaunchpadsProvider = get(),
-            saveLaunchpadProvider = get()
+            saveLaunchpadProvider = get(),
+            launchpadRepository = get()
         )
     }
 }
