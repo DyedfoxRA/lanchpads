@@ -26,6 +26,6 @@ fun submitList(recyclerView: RecyclerView, list: List<ListAdapterItem>?) {
 }
 
 @BindingAdapter("manageState")
-fun manageState(progressBar: ProgressBar, state: Boolean) {
+fun progressBarVisibility(progressBar: ProgressBar, state: Boolean) {
     progressBar.visibility = if (state) View.VISIBLE else View.GONE
 }

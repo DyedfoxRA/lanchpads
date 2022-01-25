@@ -6,11 +6,11 @@
 
         <variable
             name="launchpad"
-            type="com.example.launchpadx.data.entity.Launchpad" />
+            type="com.example.launchpadx.domain.model.Launchpad" />
 
         <variable
             name="listener"
-            type="com.example.launchpadx.ui.launchpads.LaunchpadListener" />
+            type="com.example.launchpadx.ui.launchpads_list.LaunchpadListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
