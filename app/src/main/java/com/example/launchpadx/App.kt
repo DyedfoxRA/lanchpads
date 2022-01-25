@@ -1,7 +1,6 @@
 package com.example.launchpadx
 
 import android.app.Application
-import com.example.launchpadx.di.launchpadModule
 import com.example.launchpadx.di.mapperModule
 import com.example.launchpadx.di.network.apiLaunchpadsServiceModule
 import com.example.launchpadx.di.network.networkModule
@@ -27,7 +26,6 @@ class App : Application() {
                     systemModule,
                     viewModule,
                     apiLaunchpadsServiceModule,
-                    launchpadModule,
                     repositoryModule,
                     mapperModule
                 )

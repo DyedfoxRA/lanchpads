@@ -10,5 +10,10 @@ interface LaunchpadRepository {
         onError: (String?) -> Unit
     ): Flow<List<Launchpad>>
 
-    suspend fun getLaunchpad(siteId: String): Launchpad
+    fun getLaunchpad(
+        siteId: String,
+        onStart: () -> Unit,
+        onComplete: () -> Unit,
+        onError: (String?) -> Unit
+    ): Flow<Launchpad>
 }

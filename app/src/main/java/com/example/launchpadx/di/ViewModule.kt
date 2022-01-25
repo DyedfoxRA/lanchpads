@@ -7,17 +7,16 @@ import org.koin.dsl.module
 
 val viewModule = module {
 
-    viewModel {
+    viewModel { (siteId: String) ->
         LaunchpadItemViewModel(
+            siteId = siteId,
             navigator = get(),
-            launchpadProvider = get(),
-            getLaunchpadProvider = get()
+            launchpadRepository = get()
         )
     }
     viewModel {
         LaunchpadsListViewModel(
             navigator = get(),
-            saveLaunchpadProvider = get(),
             launchpadRepository = get()
         )
     }

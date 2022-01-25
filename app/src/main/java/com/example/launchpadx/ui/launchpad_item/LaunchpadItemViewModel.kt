@@ -1,36 +1,34 @@
 package com.example.launchpadx.ui.launchpad_item
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.launchpadx.domain.interaction.launchpads.api.LaunchpadProvider
-import com.example.launchpadx.domain.interaction.launchpads.local.GetLaunchpadProvider
+import com.example.launchpadx.data.repo.remote.LaunchpadRepository
 import com.example.launchpadx.domain.model.Launchpad
 import com.example.launchpadx.navigation.Navigator
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 
 class LaunchpadItemViewModel(
+    siteId: String,
     private val navigator: Navigator,
-    private val launchpadProvider: LaunchpadProvider,
-    private val getLaunchpadProvider: GetLaunchpadProvider
+    launchpadRepository: LaunchpadRepository
 ) : ViewModel() {
 
-    val launchpad = MutableLiveData<Launchpad>()
-    val showProgress = MutableLiveData<Boolean>()
-    val errorMessage = MutableLiveData<String>()
+    private val _spinner = MutableStateFlow(false)
+    val spinner: StateFlow<Boolean> = _spinner.asStateFlow()
 
-    init {
-        getLaunchpad()
-    }
+    private val _snackBar = MutableSharedFlow<String?>(replay = 1)
+    val snackBar = _snackBar.asSharedFlow()
 
-    private fun getLaunchpad() {
-        showProgress.postValue(true)
-        viewModelScope.launch {
-            loadLaunchpad(getLaunchpadProvider.execute())
-        }
-    }
-
-    private fun loadLaunchpad(siteId: String) {
-        viewModelScope.launch {}
-    }
+    val launchpad: StateFlow<Launchpad?> = launchpadRepository.getLaunchpad(
+        siteId = siteId,
+        onStart = { _spinner.tryEmit(true) },
+        onComplete = { _spinner.tryEmit(false) },
+        onError = { _snackBar.tryEmit(it) }
+    ).stateIn(viewModelScope, SharingStarted.Lazily, null)
 }

@@ -15,5 +15,5 @@ interface LaunchpadsService {
     suspend fun getAllLaunchpads1(): Response<LaunchpadsList>
 
     @GET("launchpads/{site_id}")
-    suspend fun getOneLaunchpad(@Path("site_id") siteId: String): LaunchpadEntity
+    suspend fun getOneLaunchpad(@Path("site_id") siteId: String): Response<LaunchpadEntity>
 }

@@ -1,85 +1,41 @@
 package com.example.launchpadx.ui.launchpads_list
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.launchpadx.R
 import com.example.launchpadx.data.repo.remote.LaunchpadRepository
-import com.example.launchpadx.domain.interaction.launchpads.local.SaveLaunchpadProvider
 import com.example.launchpadx.domain.model.Launchpad
 import com.example.launchpadx.navigation.Navigator
-import com.example.launchpadx.navigation.fragment.GenericFragmentAction
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import com.example.launchpadx.navigation.fragment.LaunchpadItemFragmentAction
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 
 class LaunchpadsListViewModel(
     private val navigator: Navigator,
-    private val saveLaunchpadProvider: SaveLaunchpadProvider,
-    private val launchpadRepository: LaunchpadRepository
+    launchpadRepository: LaunchpadRepository
 ) : ViewModel(), LaunchpadListener {
 
-    val launchpads = MutableLiveData<List<Launchpad>>()
+    private val _spinner = MutableStateFlow(false)
+    val spinner: StateFlow<Boolean> = _spinner.asStateFlow()
 
-    val showProgress = MutableLiveData<Boolean>()
-    val errorMessage = MutableLiveData<String>()
+    private val _snackBar = MutableSharedFlow<String?>(replay = 1)
+    val snackBar = _snackBar.asSharedFlow()
 
-    private val _spinner = MutableLiveData<Boolean>(false)
-
-    val spinner: LiveData<Boolean>
-        get() = _spinner
-
-    private val _snackbar = MutableLiveData<String?>()
-
-    val snackbar: LiveData<String?>
-        get() = _snackbar
-
-    private fun aa() {
-        viewModelScope.launch {
-            launchpadRepository.getAllLaunchpads(
-                onStart = { },
-                onComplete = { },
-                onError = { }
-            ).collect {
-                launchpads.value = it
-            }
-        }
-    }
-
-    init {
-        aa()
-    }
+    val launchpads: StateFlow<List<Launchpad>> = launchpadRepository.getAllLaunchpads(
+        onStart = { _spinner.tryEmit(true) },
+        onComplete = { _spinner.tryEmit(false) },
+        onError = { _snackBar.tryEmit(it) }
+    ).stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
     override fun onLaunchpadClick(launchpad: Launchpad) {
-        viewModelScope.launch {
-            saveLaunchpadProvider.execute(launchpad.siteId)
-            navigate()
-        }
+        navigate(launchpad.siteId)
     }
 
-    fun navigate(destinationId: Int = R.id.action_launchpadsFragment_to_launchpadFragment) {
-        navigator.execute(GenericFragmentAction(destinationId))
-    }
-
-    fun onSnackbarShown() {
-        _snackbar.value = null
-    }
-
-    private fun loadLaunchpads() {
-//        launchDataLoad { allLaunchpadsProvider.execute() }
-    }
-
-    private fun launchDataLoad(block: suspend () -> Unit): Job {
-        return viewModelScope.launch {
-            try {
-                _spinner.value = true
-                block()
-            } catch (error: Throwable) {
-                _snackbar.value = error.message
-            } finally {
-                _spinner.value = false
-            }
-        }
+    private fun navigate(siteId: String) {
+        navigator.execute(LaunchpadItemFragmentAction(siteId))
     }
 }

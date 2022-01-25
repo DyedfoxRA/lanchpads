@@ -18,5 +18,12 @@
         android:id="@+id/launchpadFragment"
         android:name="com.example.launchpadx.ui.launchpad_item.LaunchpadItemFragment"
         android:label="LaunchpadFragment"
-        tools:layout="@layout/launchpad_item_fragment" />
+        tools:layout="@layout/launchpad_item_fragment">
+        <argument
+            android:name="siteId"
+            app:argType="string" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_launchpadFragment"
+        app:destination="@id/launchpadFragment" />
 </navigation>

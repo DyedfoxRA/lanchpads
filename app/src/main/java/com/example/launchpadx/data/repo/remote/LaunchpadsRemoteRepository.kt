@@ -2,6 +2,7 @@ package com.example.launchpadx.data.repo.remote
 
 import androidx.annotation.WorkerThread
 import com.example.launchpadx.data.api.service.launchpads.LaunchpadsService
+import com.example.launchpadx.data.entity.LaunchpadEntity
 import com.example.launchpadx.data.entity.LaunchpadsList
 import com.example.launchpadx.data.safeExecute
 import com.example.launchpadx.domain.mapppers.launchpad.LaunchpadEntityToLaunchpadMapper
@@ -37,8 +38,24 @@ class LaunchpadsRemoteRepository(
         .onCompletion { onComplete() }
         .flowOn(ioDispatcher)
 
-    override suspend fun getLaunchpad(siteId: String): Launchpad {
-        return launchpadEntityToLaunchpadMapper
-            .map(launchpadsService.getOneLaunchpad(siteId))
+    override fun getLaunchpad(
+        siteId: String,
+        onStart: () -> Unit,
+        onComplete: () -> Unit,
+        onError: (String?) -> Unit
+    ): Flow<Launchpad> = flow {
+        safeExecute<LaunchpadEntity> {
+            request = { launchpadsService.getOneLaunchpad(siteId) }
+            success = { launchpadEntity ->
+                emit(launchpadEntityToLaunchpadMapper.map(launchpadEntity))
+            }
+            error = { error -> onError(error.message) }
+        }
     }
+        .onStart { onStart() }
+        .onCompletion { onComplete() }
+        .flowOn(ioDispatcher)
+
+//        return launchpadEntityToLaunchpadMapper
+//            .map(launchpadsService.getOneLaunchpad(siteId))
 }
