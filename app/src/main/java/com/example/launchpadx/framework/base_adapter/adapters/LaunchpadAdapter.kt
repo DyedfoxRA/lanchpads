@@ -36,6 +36,11 @@ class LaunchpadAdapter(
     private val diffUtil = object : DiffUtil.ItemCallback<Launchpad>() {
         override fun areItemsTheSame(oldItem: Launchpad, newItem: Launchpad) = oldItem.id == newItem.id
         override fun areContentsTheSame(oldItem: Launchpad, newItem: Launchpad) = oldItem == newItem
+
+        override fun getChangePayload(oldItem: Launchpad, newItem: Launchpad): Any? {
+            if (oldItem.siteId != newItem.siteId) return newItem.siteId
+            return super.getChangePayload(oldItem, newItem)
+        }
     }
 }
 
@@ -50,5 +55,10 @@ class LaunchpadViewHolder(
             onLaunchpad(item)
         }
         launchpadName.text = item.name
+    }
+
+    override fun onBind(item: Launchpad, payloads: List<Any>) {
+        super.onBind(item, payloads)
+        // todo here we can add logic on click
     }
 }

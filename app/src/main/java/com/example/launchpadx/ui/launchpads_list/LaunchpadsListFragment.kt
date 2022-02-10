@@ -11,6 +11,9 @@ import com.example.launchpadx.databinding.LaunchpadsListFragmentBinding
 import com.example.launchpadx.domain.model.Launchpad
 import com.example.launchpadx.framework.base_adapter.GenericAdapter
 import com.example.launchpadx.framework.base_adapter.adapters.LaunchpadAdapter
+import com.example.launchpadx.framework.base_adapter.animations.AddableItemAnimator
+import com.example.launchpadx.framework.base_adapter.animations.custom.SimpleCommonAnimator
+import com.example.launchpadx.framework.base_adapter.animations.custom.SlideInLeftCommonAnimator
 import com.example.launchpadx.framework.base_adapter.decoration.FeedDividerItemDecoration
 import com.example.launchpadx.framework.base_adapter.decoration.PostDividerItemDecoration
 import com.google.android.material.snackbar.Snackbar
@@ -35,6 +38,12 @@ class LaunchpadsListFragment : Fragment(R.layout.launchpads_list_fragment) {
 
             addItemDecoration(FeedDividerItemDecoration(70))
             addItemDecoration(PostDividerItemDecoration(R.layout.launchpad_item, 10, 0))
+
+            itemAnimator = AddableItemAnimator(SimpleCommonAnimator()).also { animator ->
+                animator.addViewTypeAnimation(R.layout.launchpad_item, SlideInLeftCommonAnimator())
+                animator.addDuration = 500L
+                animator.removeDuration = 500L
+            }
         }
     }
 
