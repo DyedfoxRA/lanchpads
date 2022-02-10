@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.stateIn
 class LaunchpadsListViewModel(
     private val navigator: Navigator,
     launchpadRepository: LaunchpadRepository
-) : ViewModel(), LaunchpadListener {
+) : ViewModel() {
 
     private val _spinner = MutableStateFlow(false)
     val spinner: StateFlow<Boolean> = _spinner.asStateFlow()
@@ -31,11 +31,7 @@ class LaunchpadsListViewModel(
         onError = { _snackBar.tryEmit(it) }
     ).stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
-    override fun onLaunchpadClick(launchpad: Launchpad) {
-        navigate(launchpad.siteId)
-    }
-
-    private fun navigate(siteId: String) {
+    fun navigate(siteId: String) {
         navigator.execute(LaunchpadItemFragmentAction(siteId))
     }
 }

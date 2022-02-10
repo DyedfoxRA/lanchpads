@@ -10,9 +10,6 @@
         android:name="com.example.launchpadx.ui.launchpads_list.LaunchpadsListFragment"
         android:label="launchpads_fragment"
         tools:layout="@layout/launchpads_list_fragment">
-        <action
-            android:id="@+id/action_launchpadsFragment_to_launchpadFragment"
-            app:destination="@id/launchpadFragment" />
     </fragment>
     <fragment
         android:id="@+id/launchpadFragment"
