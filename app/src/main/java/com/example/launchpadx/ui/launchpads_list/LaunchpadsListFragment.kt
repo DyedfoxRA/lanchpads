@@ -59,7 +59,7 @@ class LaunchpadsListFragment : Fragment(R.layout.launchpads_list_fragment) {
         }
         lifecycleScope.launch {
             listViewModel.launchpads.collect {
-                adapter.setItems(it)
+                adapter.submitList(it)
             }
         }
     }

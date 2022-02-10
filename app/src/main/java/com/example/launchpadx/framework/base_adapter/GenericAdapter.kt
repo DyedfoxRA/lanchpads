@@ -2,15 +2,14 @@ package com.example.launchpadx.framework.base_adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
 import androidx.viewbinding.ViewBinding
 
 class GenericAdapter(
     private val genericItems: List<GenericItem<*, *>>
-) : RecyclerView.Adapter<BaseViewHolder<ViewBinding, Item>>() {
-
-    private val items = mutableListOf<Item>()
+) : ListAdapter<Item, BaseViewHolder<ViewBinding, Item>>(
+    GenericDiffUtil(genericItems)
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<ViewBinding, Item> {
         val inflater = LayoutInflater.from(parent.context)
@@ -21,26 +20,13 @@ class GenericAdapter(
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<ViewBinding, Item>, position: Int) {
-        holder.onBind(items[position])
-    }
-
-    override fun getItemCount(): Int {
-        return items.size
+        holder.onBind(currentList[position])
     }
 
     override fun getItemViewType(position: Int): Int {
-        val item = items[position]
+        val item = currentList[position]
         return genericItems.find { it.isRelativeItem(item) }
             ?.getLayoutId()
             ?: throw java.lang.IllegalArgumentException("View type not found: $item")
-    }
-
-    fun setItems(newItems: List<Item>) {
-        val newList = newItems.toList()
-        val fingerprintDiffUtil = GenericDiffUtil(genericItems, items, newList)
-        val diffResult = DiffUtil.calculateDiff(fingerprintDiffUtil)
-        items.clear()
-        items.addAll(newList)
-        diffResult.dispatchUpdatesTo(this)
     }
 }
