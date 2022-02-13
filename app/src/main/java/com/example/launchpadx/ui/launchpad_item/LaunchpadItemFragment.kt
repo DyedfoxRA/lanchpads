@@ -34,6 +34,16 @@ class LaunchpadItemFragment : Fragment(R.layout.launchpad_item_fragment) {
         }
         lifecycleScope.launch {
             with(binding) {
+                itemViewModel.spinner.collect {
+                    if (it)
+                        progressBar.visibility = View.VISIBLE
+                    else
+                        progressBar.visibility = View.GONE
+                }
+            }
+        }
+        lifecycleScope.launch {
+            with(binding) {
                 itemViewModel.launchpad.collect { launchpad ->
                     launchpadName.text = launchpad?.name
                     launchpadStatus.text = launchpad?.status

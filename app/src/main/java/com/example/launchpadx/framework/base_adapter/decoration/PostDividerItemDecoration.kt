@@ -17,10 +17,13 @@ class PostDividerItemDecoration(
         state: RecyclerView.State
     ) {
         super.getItemOffsets(outRect, view, parent, state)
-        if (parent.getChildViewHolder(view).itemViewType != viewType) return
+        val childViewHolder = parent.getChildViewHolder(view)
+        if (childViewHolder.itemViewType != viewType) return
 
         val adapter = parent.adapter ?: return
-        val currentPosition = parent.getChildAdapterPosition(view).takeIf { it != RecyclerView.NO_POSITION } ?: return
+        val currentPosition = parent.getChildAdapterPosition(view)
+            .takeIf { it != RecyclerView.NO_POSITION }
+            ?: childViewHolder.oldPosition
 
         val isPrevTargetView = adapter.isPrevTargetView(currentPosition, viewType)
         val isNextTargetView = adapter.isNextTargetView(currentPosition, viewType)
