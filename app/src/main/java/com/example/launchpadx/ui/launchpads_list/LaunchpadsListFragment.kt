@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.launchpadx.R
@@ -16,6 +17,7 @@ import com.example.launchpadx.framework.base_adapter.animations.custom.SimpleCom
 import com.example.launchpadx.framework.base_adapter.animations.custom.SlideInLeftCommonAnimator
 import com.example.launchpadx.framework.base_adapter.decoration.FeedDividerItemDecoration
 import com.example.launchpadx.framework.base_adapter.decoration.PostDividerItemDecoration
+import com.example.launchpadx.utils.SwipeToDelete
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -45,6 +47,13 @@ class LaunchpadsListFragment : Fragment(R.layout.launchpads_list_fragment) {
                 animator.removeDuration = 500L
             }
         }
+        val onItemSwipedToDelete = { positionForRemove: Int ->
+            val launch = adapter.currentList[positionForRemove] as Launchpad
+            listViewModel.remoteItem(launch.siteId)
+        }
+
+        val swipeToDeleteCallback = SwipeToDelete(onItemSwipedToDelete)
+        ItemTouchHelper(swipeToDeleteCallback).attachToRecyclerView(binding.recyclerView)
     }
 
     private fun initListeners() {
