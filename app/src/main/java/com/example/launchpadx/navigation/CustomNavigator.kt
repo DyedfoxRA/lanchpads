@@ -2,8 +2,8 @@ package com.example.launchpadx.navigation
 
 import android.app.Activity
 import android.app.Application
-import java.lang.ref.WeakReference
 import com.example.launchpadx.utils.registerActivityLifecycleCallbacks
+import java.lang.ref.WeakReference
 
 class CustomNavigator(app: Application) : Navigator {
 
